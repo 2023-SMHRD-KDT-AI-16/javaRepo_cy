@@ -17,7 +17,7 @@ public class Ex01 {
 		
 
 
-		
+		//정수
 		int num = 10;
 		
 		do {
