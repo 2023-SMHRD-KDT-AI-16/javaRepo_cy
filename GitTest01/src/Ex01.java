@@ -25,6 +25,12 @@ public class Ex01 {
 		   
 		// 장민중
 		Ex01 ex = new Ex01(); // 객체 생성   
+		
+		
+		
+		
+		
+		System.out.println("승영아 힘내");
 
 	}
 	
