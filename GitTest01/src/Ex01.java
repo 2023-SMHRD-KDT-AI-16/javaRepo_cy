@@ -1,3 +1,4 @@
+import java.nio.file.spi.FileSystemProvider;
 
 public class Ex01 {
 
@@ -9,6 +10,10 @@ public class Ex01 {
 		System.out.println("팀원2 세번째 커밋!");
 		System.out.println("팀원3 네번째 커밋!");
 		System.out.println("팀원5 다번째 커밋!");
+		
+		int num1 = 10;
+		int num2 = 20;
+		System.out.println(num1+num2);
 
 	}
 	
