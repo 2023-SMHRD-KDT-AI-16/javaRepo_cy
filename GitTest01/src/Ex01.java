@@ -32,7 +32,22 @@ public class Ex01 {
 		
 		System.out.println("승영아 힘내");
 
+		
+		
+		for(int i = 21; i <= 57; i++) {
+			System.out.print(i+ " ");
+		}
+		System.out.println();
+		
+		for(int i = 96; i >= 53; i--) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
+		
+		for(int i = 21; i <= 57; i+=2) {
+			System.out.print(i + " ");
 	}
 	
 
+}
 }
