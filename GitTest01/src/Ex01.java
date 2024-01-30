@@ -1,4 +1,5 @@
 import java.nio.file.spi.FileSystemProvider;
+import java.util.Scanner;
 
 public class Ex01 {
 
@@ -46,8 +47,18 @@ public class Ex01 {
 		
 		for(int i = 21; i <= 57; i+=2) {
 			System.out.print(i + " ");
-	}
-	
+			
+			
+	}//점수 입력받는 스캐너
+		Scanner sc = new Scanner(System.in);
+		System.out.print("점수를 입력해주세요 : "); // 단순 출력문
+		int score = sc.nextInt(); // 입력해서 변수 score에 값을 담아두는 문장.		
+		
+		if(60<score) {
+			System.out.println("합격입니다.");
+		}else {
+			System.out.println("불합격입니다.");
 
-}
+		}
+	}
 }
