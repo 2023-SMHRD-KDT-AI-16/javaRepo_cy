@@ -14,6 +14,11 @@ public class Ex01 {
 		int num1 = 10;
 		int num2 = 20;
 		System.out.println(num1+num2);
+		
+		String java = "우리집 강아지의";
+		   String AS ="구름";
+		   System.out.println(java+"별명은"+AS+"입니다");
+		   
 
 	}
 	
