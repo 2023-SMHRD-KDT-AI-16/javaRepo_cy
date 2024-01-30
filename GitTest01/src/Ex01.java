@@ -11,13 +11,20 @@ public class Ex01 {
 		System.out.println("팀원3 네번째 커밋!");
 		System.out.println("팀원5 다번째 커밋!");
 		
+		// 박경완
 		int num1 = 10;
 		int num2 = 20;
 		System.out.println(num1+num2);
 		
+		// 김경민
 		String java = "우리집 강아지의";
 		   String AS ="구름";
 		   System.out.println(java+"별명은"+AS+"입니다");
+		   
+		// 장민중
+		Ex01 ex = new Ex01(); // 객체 생성   
+		   
+		   
 		   
 
 	}
