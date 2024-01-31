@@ -37,7 +37,7 @@ public class LoginFrame extends JFrame{
 			setVisible(true); // 보이도록 설정
 		}
 		
-		setSize(500,400);
+		setSize(600,400);
 		setResizable(false); // 사용자가 크기 조절 불가
 		
 	}
