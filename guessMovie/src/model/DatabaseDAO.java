@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class DatabaseDAO {
 
-	private Connection conn;
-	private PreparedStatement psmt;
-	private ResultSet rs;
+	private static Connection conn;
+	private static PreparedStatement psmt;
+	private static ResultSet rs;
 
 	// Connect 메소드
-	private void getConn() {
+	public static void getConn() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -36,7 +36,7 @@ public class DatabaseDAO {
 	}
 
 	// close 하는 메소드
-	private void allClose() {
+	private static void allClose() {
 		try {
 			if (rs != null)
 				rs.close();
@@ -162,6 +162,45 @@ public class DatabaseDAO {
 		} finally {
 			allClose();
 		}
+	}
+	
+	public static Boolean loginInfo(String id, String pw){
+		// 로그인 검사하는 메소드 loginInfo
+		
+		String dbID = null;
+		String dbPW = null;
+		
+		getConn();
+		try {
+			// sql통과 통로
+			String sql = "select ID,PW from member where ID = ?";
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, id);
+			
+			// ?채우기 - ?가 없으면 생략
+
+			// sql통과 하세요!
+			rs = psmt.executeQuery();
+
+			// select 한줄의 데이터 확인 rs.next()
+			while (rs.next()) {
+				dbID = rs.getString(1);
+				dbPW = rs.getString(2);
+			}
+			if(dbID.equals(id)&&dbPW.equals(pw)) { // 아이디 비번 일치
+				System.out.println("아이디 비번 일치");
+				return true;
+			}else {
+				System.out.println("아이디 비번 불일치");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			allClose();
+		}
+		return false;
 	}
 
 }
