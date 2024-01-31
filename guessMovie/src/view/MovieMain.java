@@ -10,20 +10,17 @@ import model.LoginDTO;
 
 public class MovieMain {
 
-	public static void main(String[] args) {
-
-	}
 	// 연습게임
 
 	private static final char[] Remaining_Number = null;
 
-	public static void main1(String[] args) {
+	public static void main(String[] args) {
 		// 게임을 다시 할 것인지 물어봄
 		while (playGame()) {
 
 		}
-		System.out.println("게임을 종료합니다");
 
+		// 터치를 전달 .
 
 		Scanner sc = new Scanner(System.in);
 
@@ -112,7 +109,6 @@ public class MovieMain {
 				System.out.println("잘못 눌렀습니다!");
 			}
 		}
-
 
 	}
 

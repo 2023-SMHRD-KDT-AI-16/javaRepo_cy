@@ -22,6 +22,7 @@ public class LoginDTO {
 		this.email = email;
 	}
 
+
 	public LoginDTO(int pic_num, String pic_id, String pic_hint, String actor) {
 		this.pic_num = pic_num;
 		this.pic_id = pic_id;
