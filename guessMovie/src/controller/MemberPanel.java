@@ -7,7 +7,7 @@ public class MemberPanel extends JPanel{ // 회원이 마주하게 되는 화면
 
 	private JLabel logoImageLab;
 	
-	private ImageIcon logoIcon = new ImageIcon("../GuessMovie_Test/logoPic/movie_logo.png");
+	private ImageIcon logoIcon = new ImageIcon("../guessMovie/src/logoPic/movie_logo.png");
 	
 	public MemberPanel() {
 		setLayout(null); // 컴포넌트 위치 초기화
