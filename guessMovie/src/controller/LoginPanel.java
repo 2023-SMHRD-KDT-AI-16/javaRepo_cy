@@ -6,7 +6,7 @@ public class LoginPanel extends JPanel{ // 비회원이 처음 마주하게 되�
 
 	private JLabel logoImageLab;
 	
-	private ImageIcon logoIcon = new ImageIcon("../GuessMovie_Test/logoPic/movie_logo.png");
+	private ImageIcon logoIcon = new ImageIcon("../guessMovie/src/logoPic/movie_logo.png");
 	
 	public LoginPanel() {
 		setLayout(null); // 컴포넌트 위치 초기화
