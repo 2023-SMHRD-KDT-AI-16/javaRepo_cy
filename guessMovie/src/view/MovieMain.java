@@ -148,7 +148,7 @@ public class MovieMain {
 			// switch 문을 사용하여 정답 여부 확인
 			while (true) {
 				if (Remaining_Number < 0) {
-					System.out.println("5번 시도 동안 정답을 맞추지 못하였습니다.");
+					System.out.println("3번 시도 동안 정답을 맞추지 못하였습니다.");
 					break;
 				} else {
 					if (userGuess.equals(selectedMovie)) { // 정답일 경우
