@@ -22,6 +22,7 @@ public class ImageDAO extends JFrame {
 	    private static JLabel imageLabel;
 
 	    public ImageDAO() {
+	    	
 	        setTitle("영화 제목 맞추기 문제");
 	        setSize(600,600);
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,9 +53,11 @@ public class ImageDAO extends JFrame {
 	    }
 
 	    public void displayImage(int j) {
+	    	
 	    	initializeImages();
-	        int imageNum = j-1;
+	        int imageNum = j;
 	        imageLabel.setIcon(imageIcons.get(imageNum));
+	        
 	            
 	    }
 	   
