@@ -10,9 +10,6 @@ public class MovieMain {
 
 	public static void main(String[] args) {
 
-		// 터치를 전달 .
-
-
 		Scanner sc = new Scanner(System.in);
 
 		DatabaseDAO dbdao = new DatabaseDAO();
@@ -22,12 +19,13 @@ public class MovieMain {
 			System.out.println("1.회원 가입");
 			System.out.println("2.비밀 번호 수정");
 			System.out.println("3.회원정보 삭제");
-			System.out.println("4.전체 회원 조회");
-			System.out.println("5.프로그램 종료");
+			System.out.println("4.로그인하세요");
+			System.out.println("5.랭킹 조회");
+			System.out.println("6.프로그램 종료");
 
 			int choice = sc.nextInt();
 
-			if (choice == 5) {
+			if (choice == 6) {
 				System.out.println("프로그램 종료");
 				break;
 
@@ -87,89 +85,34 @@ public class MovieMain {
 				}
 
 			} else if (choice == 4) {
-				ArrayList<LoginDTO> dtoList = dbdao.selectMember();
+				System.out.println("로그인창입니다");
+				System.out.println("아이디 입력 : ");
+				String dbID = sc.next();
+				System.out.println("비밀번호 입력 : ");
+				String dbPW = sc.next();
+
+				if (dbdao.loginInfo(dbID, dbPW) == true) {
+					System.out.println("로그인 성공");
+
+				} else {
+					System.out.println("로그인 실패");
+				}
+
+			} else if (choice == 5) {
+
+				System.out.println("게임 랭킹 순위입니다");
+
+				ArrayList<LoginDTO> dtoList = dbdao.showRank();
 				for (int i = 0; i < dtoList.size(); i++) {
 					// System.out.println(dtoList.get(i)); // 주소값
-					System.out.println("id : " + dtoList.get(i).getId());
-					System.out.println("pw : " + dtoList.get(i).getPw());
-					System.out.println("name : " + dtoList.get(i).getName());
-					System.out.println("age : " + dtoList.get(i).getEmail());
+					System.out.println((i + 1) + "위 : " + dtoList.get(i).getRank());
+
 				}
 
 			} else {
 				System.out.println("잘못 눌렀습니다!");
 			}
 		}
-
-	}
-
-
-	// 게임 플레이하는 메소드
-	private static boolean playGame() {
-
-		// 영화 제목 배열
-		String[] movieTitles = { "변호인", "도둑들", "택시운전사", "기생충", "써니", "7번방의 선물", "국제시장", "명량", "극한직업", "신과함께" };
-
-		// 랜덤으로 영화 선택
-		int randomIndex = (int) (Math.random() * movieTitles.length);
-		String selectedMovie = movieTitles[randomIndex].toUpperCase(); // 대소문자 구분 없이 맞출 수 있도록 대문자로 변환
-
-		// 게임 시작 메시지
-		System.out.println("영화 제목 맞추기 게임을 시작합니다!");
-		System.out.println("영화의 제목은 " + selectedMovie.length() + "글자 입니다.");
-
-		// 사용자 입력 받기
-		Scanner scanner = new Scanner(System.in);
-
-		// 사용자에게 영화 제목을 맞추도록 함
-		boolean gameWon = false;
-		int attempts = 0;
-		final int maxNumber = 3; // 총 도전횟수 3번
-		int score = 0; // 시작점수는 0점
-		int newScore = 10; // 문제를 맞추면 10점
-		boolean toggle = true;
-
-		while ((!gameWon && attempts < maxNumber) && toggle) {
-			int Remaining_Number = maxNumber - attempts; // 남은 도전횟수 보여주기
-			System.out.println("남은 시도 횟수: " + Remaining_Number);
-			System.out.print("영화 제목을 입력하세요: ");
-
-			String userGuess = scanner.nextLine(); // 대소문자 구분 없이 비교하기 위해 대문자로 변환
-			attempts++;
-
-			// switch 문을 사용하여 정답 여부 확인
-			while (true) {
-				if (Remaining_Number < 0) {
-					System.out.println("3번 시도 동안 정답을 맞추지 못하였습니다.");
-					break;
-				} else {
-					if (userGuess.equals(selectedMovie)) { // 정답일 경우
-
-						System.out.println("축하합니다! 영화 제목을 맞추셨습니다.");
-						score += newScore;
-						System.out.println("현재 누적된 점수 : " + score);
-						toggle = false;
-						break;
-
-					} else { // 정답이 아닐 경우
-						System.out.println("틀렸습니다. 다시 시도하세요.");
-
-						System.out.println("현재 누적된 점수 : " + score);
-						break;
-					}
-
-				}
-
-			}
-		}
-
-		// 다시 플레이할지 물어봄
-		System.out.print("게임을 다시 하시겠습니까? (y/n): ");
-		String playAgain = scanner.next();
-		if (playAgain.equals("y")) {
-			return true;
-		} else
-			return false;
 
 	}
 
