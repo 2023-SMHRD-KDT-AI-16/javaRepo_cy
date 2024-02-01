@@ -232,7 +232,7 @@ public class DatabaseDAO {
 			
 			while (rs.next()) { // 데이터 한줄 가져오기
 				dbID = rs.getString(1);
-				if(dbID == join_id) { // 비어있지 않다면 -> 가입 불가능
+				if(dbID.equals(join_id)) { // 비어있지 않다면 -> 가입 불가능
 					return false;
 				}else { // 
 					return true; // 비어있다면 -> 가입 가능

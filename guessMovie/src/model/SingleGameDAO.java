@@ -46,8 +46,13 @@ public class SingleGameDAO {
 				// 사용자 입력 받기
 				Scanner scanner = new Scanner(System.in);
 
+				
 				// 사용자에게 영화 제목을 맞추도록 함
 				while ((!gameWon && attempts < maxNumber) && toggle) {
+					int j = randomIndex;
+					ImageDAO dao = new ImageDAO();
+					dao.displayImage(j);
+					
 					int Remaining_Number = maxNumber - attempts; // 남은 도전횟수 보여주기
 					System.out.println("남은 시도 횟수: " + Remaining_Number);
 					System.out.print("영화 제목을 입력하세요: ");
