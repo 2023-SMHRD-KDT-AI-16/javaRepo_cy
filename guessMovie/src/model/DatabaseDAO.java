@@ -197,7 +197,7 @@ public class DatabaseDAO {
 					}
 				}else {
 					// 비어있다 -> 등록되어 있지 않다
-					System.out.println("회원 가입이 가능합니다");
+					System.out.println("등록되지 않은 아이디입니다.");
 					return false;
 				}
 			}
