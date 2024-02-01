@@ -1,4 +1,4 @@
-\package view;
+package view;
 
 import java.util.Scanner;
 
@@ -185,7 +185,12 @@ public class GameMain {
 					
 					System.out.println("정보 수정 페이지 입니다.");
 					
+					System.out.print("ID를 입력해주세요. : "); 
+					String changeID = sc.next();
 					
+					System.out.print("변경하실 비밀번호를 입력해주세요. : ");
+					String changePW = sc.next();
+
 					break;
 			
 				case 4: 
