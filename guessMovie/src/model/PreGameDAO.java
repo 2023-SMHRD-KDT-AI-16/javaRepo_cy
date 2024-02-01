@@ -18,6 +18,7 @@ public class PreGameDAO {
 		// 랜덤으로 영화 선택
 		int randomIndex = (int) (Math.random() * movieTitles.length);
 		String selectedMovie = movieTitles[randomIndex].toUpperCase(); // 대소문자 구분 없이 맞출 수 있도록 대문자로 변환
+		int j = randomIndex;
 		
 		String[][] hintCharacter = { // 2차원배열로 각 영화의 주인공들
 				{"차태현","하정우","주지훈","김향기"}, // 신과함께
@@ -37,6 +38,9 @@ public class PreGameDAO {
         System.out.println("영화 제목 맞추기 게임을 시작합니다!");
 		System.out.println("영화의 제목은 " + selectedMovie.length() + "글자 입니다.");
 
+		ImageDAO dao = new ImageDAO();
+		dao.displayImage(j);
+		
 		// 사용자 입력 받기
 		Scanner scanner = new Scanner(System.in);
 
@@ -49,6 +53,8 @@ public class PreGameDAO {
 		boolean toggle = true;
 
 		while ((!gameWon && attempts < maxNumber) && toggle) {
+		
+			
 			int Remaining_Number = maxNumber - attempts; // 남은 도전횟수 보여주기
 			System.out.println("남은 시도 횟수: " + Remaining_Number);
 			System.out.print("영화 제목을 입력하세요: ");

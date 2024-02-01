@@ -40,7 +40,6 @@ public class ImageDAO extends JFrame {
 	    ImageIcon imageIcon;
 	    
 	    private void initializeImages() {
-	        // 이미지를 40개 로드하여 List에 저장
 	        imageIcons = new ArrayList<>();
 	        for (int i = 1; i <= 10; i++) {
 	        	if(i == 2|| i==6||i==9||i==10) {
@@ -50,7 +49,6 @@ public class ImageDAO extends JFrame {
 	        	}
 	            imageIcons.add(imageIcon);
 	        }
-	        System.out.println(imageIcons.get(0));
 	    }
 
 	    public void displayImage(int j) {
@@ -59,14 +57,6 @@ public class ImageDAO extends JFrame {
 	        imageLabel.setIcon(imageIcons.get(imageNum));
 	            
 	    }
-	    
-	    public static void main(String[] args) {
-	        SwingUtilities.invokeLater(new Runnable() {
-	            @Override
-	            public void run() {
-	                new ImageDAO();
-	            }
-	        });
-	    }
+	   
 
 }
