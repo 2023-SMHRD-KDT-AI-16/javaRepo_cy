@@ -7,14 +7,12 @@ package model;
 		// 제목, 가수명, 음악길이(초), 음악파일의 경로.
 		private String title;
 		private String singer;
-		private int playtime;
 		private String musicPath;
 		
 		//생성자
-		public MusicVO(String title, String singer, int playtime, String musicPath) {
+		public MusicVO(String title, String singer, String musicPath) {
 			this.title = title;
 			this.singer = singer;
-			this.playtime = playtime;
 			this.musicPath = musicPath;
 		}
 
@@ -27,9 +25,6 @@ package model;
 			return singer;
 		}
 
-		public int getPlaytime() {
-			return playtime;
-		}
 
 		public String getMusicPath() {
 			return musicPath;

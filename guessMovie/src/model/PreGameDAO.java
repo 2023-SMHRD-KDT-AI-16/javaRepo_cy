@@ -35,8 +35,24 @@ public class PreGameDAO {
 		
 		
 		// 게임 시작 메시지
-        System.out.println("영화 제목 맞추기 게임을 시작합니다!");
-		System.out.println("영화의 제목은 " + selectedMovie.length() + "글자 입니다.");
+		System.out.println("\n❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢ ❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢ ❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢");
+		System.out.println("\r\n"
+				+ " _     _  _______  ___      _______  _______  __   __  _______ \r\n"
+				+ "| | _ | ||       ||   |    |       ||       ||  |_|  ||       |\r\n"
+				+ "| || || ||    ___||   |    |       ||   _   ||       ||    ___|\r\n"
+				+ "|       ||   |___ |   |    |       ||  | |  ||       ||   |___ \r\n"
+				+ "|       ||    ___||   |___ |      _||  |_|  ||       ||    ___|\r\n"
+				+ "|   _   ||   |___ |       ||     |_ |       || ||_|| ||   |___ \r\n"
+				+ "|__| |__||_______||_______||_______||_______||_|   |_||_______|\r\n"
+				+ "\n");
+        System.out.println("❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢ ❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢ ❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢");
+        
+        System.out.println("\t\t영화 제목 맞추기 게임을 시작합니다! ");
+        System.out.println("\t\t연습 게임에서는 랭킹 정보가 저장되지 않습니다. ");
+        
+        System.out.println("❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢ ❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢ ❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢");
+		System.out.println("\n영화의 제목은 " + selectedMovie.length() + "글자 입니다.");
+
 
 		ImageDAO dao = new ImageDAO();
 		dao.displayImage(j);
@@ -47,7 +63,7 @@ public class PreGameDAO {
 		// 사용자에게 영화 제목을 맞추도록 함
 		boolean gameWon = false; //게임이 종료될때 사용되는 변수 답을 맞추면 true로 바뀌고 틀리면 false로 유지
 		int attempts = 0; // 총 시도 횟수
-		final int maxNumber = 5; // 총 도전횟수 5번
+		final int maxNumber = 3; // 총 도전횟수 3번
 		int score = 0; // 시작점수는 0점
 		int newScore = 10; // 문제를 맞추면 10점
 		boolean toggle = true;
@@ -56,35 +72,54 @@ public class PreGameDAO {
 		
 			
 			int Remaining_Number = maxNumber - attempts; // 남은 도전횟수 보여주기
-			System.out.println("남은 시도 횟수: " + Remaining_Number);
-			System.out.print("영화 제목을 입력하세요: ");
+			System.out.println("남은 시도 횟수 : " + Remaining_Number);
+			System.out.print("영화 제목을 입력하세요 : ");
 
 			String userGuess = scanner.nextLine(); // 대소문자 구분 없이 비교하기 위해 대문자로 변환
 			attempts++;
 
 			// switch 문을 사용하여 정답 여부 확인
 			while (true) {
-				if (Remaining_Number < 0) {
-					System.out.println("5번 시도 동안 정답을 맞추지 못하였습니다.");
+				if (Remaining_Number <= 0) {
+					System.out.println("3번 시도 동안 정답을 맞추지 못하였습니다.");
 					break;
 				} else {
 					if (userGuess.equals(selectedMovie)) { // 정답일 경우
 
-						System.out.println("축하합니다! 영화 제목을 맞추셨습니다.");
+						System.out.println(".　♪　∧,＿∧\r\n"
+								+ "　 　(´･ω･`) ))\r\n"
+								+ "　(( (　つ　ヽ、　♪\r\n"
+								+ "　　　〉 とノ　)))\r\n"
+								+ "　　（__ノ^(＿)\r\n"
+								+ "");
+						System.out.println("축하합니다 ! 영화 제목을 맞추셨습니다.");
 						score += newScore;
-						System.out.println("현재 누적된 점수 : " + score);
+						System.out.println("┌───────────────┐\r\n"
+								+ "  누적 점수 : "+score+"\r\n"
+								+ "└───────────────┘\r\n"
+								+ "　　ᕱ ᕱ ||\r\n"
+								+ "　 ( ･ω･ ||\r\n"
+								+ "　 /　つΦ\r\n");
 						toggle = false;
 						break;
 
 					} else { // 정답이 아닐 경우
+						System.out.print("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\r\n"
+								+ "████▌▄▌▄▐▐▌█████\r\n"
+								+ "████▌▄▌▄▐▐▌▀████\r\n"
+								+ "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\r");
 						System.out.println("틀렸습니다. 다시 시도하세요.");
 						
 						// 힌트 제공
 						if(attempts == 1) {
 							provideHint(hintCharacter, randomIndex);
 						}
-							
-						System.out.println("현재 누적된 점수 : " + score);
+						System.out.println("┌───────────────┐\r\n"
+								+ "  누적 점수 : "+score+"\r\n"
+								+ "└───────────────┘\r\n"
+								+ "　　ᕱ ᕱ ||\r\n"
+								+ "　 ( ･ω･ ||\r\n"
+								+ "　 /　つΦ\r\n");
 						break;
 					}
 
@@ -98,17 +133,21 @@ public class PreGameDAO {
 		String playAgain = scanner.next();
 		if (playAgain.equals("y")) {
 			return true;
-		} else
+		} else {
+			System.out.println();
+			System.out.println("또 만나요!");
 			return false;
+		}
 	}
 		
 		// 힌트를 제공하는 메소드
 	    private static void provideHint(String[][] hintCharacter, int randomIndex) {
+	    	System.out.println();
 	    	System.out.print("힌트: 주인공 이름은 " ); 
 	    	for(int i = 0; i<hintCharacter[randomIndex].length; i++ ) {  
 	    	System.out.print(hintCharacter[randomIndex][i]+" ");
 	    }
-	        System.out.println("입니다");
+	        System.out.println("입니다\n");
 	    }
 	
 

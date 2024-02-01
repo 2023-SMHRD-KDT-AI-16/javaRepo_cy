@@ -14,7 +14,7 @@ public class DatabaseDAO {
 	private static PreparedStatement psmt;
 	private static ResultSet rs;
 
-	// Connect 메소드
+	// Connect 메소드 - 민중님 작성
 	public static void getConn() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -35,7 +35,7 @@ public class DatabaseDAO {
 
 	}
 
-	// close 하는 메소드
+	// close 하는 메소드 - 민중님 작성
 	private static void allClose() {
 		try {
 			if (rs != null)
@@ -50,48 +50,96 @@ public class DatabaseDAO {
 
 	}
 
-	// delete기능 메소드
-	public int deleteMember(String delete_id) {
-		getConn();
-		try {
-			// sql통과 통로
-			String sql = "delete from member where id = ?";
-			psmt = conn.prepareStatement(sql);
+//	// delete기능 메소드 - 민중님 작성
+//	public int deleteMember(String delete_id) {
+//		getConn();
+//		try {
+//			// sql통과 통로
+//			String sql = "delete from member where id = ?";
+//			psmt = conn.prepareStatement(sql);
+//
+//			// ?채우기 - ?가 없으면 생략
+//			psmt.setString(1, delete_id);
+//			// sql통과 하세요!
+//			int row = psmt.executeUpdate();
+//			return row;
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			return 0;
+//		} finally {
+//			allClose();
+//
+//		}
+//
+//	}
+	
+	
+	// select기능 메소드
+		public ArrayList<LoginDTO> selectRanking() {
+			ArrayList<LoginDTO> dtoList = new ArrayList<LoginDTO>();
 
-			// ?채우기 - ?가 없으면 생략
-			psmt.setString(1, delete_id);
-			// sql통과 하세요!
-			int row = psmt.executeUpdate();
-			return row;
+			getConn();
+			try {
+				// sql통과 통로
+				String sql = "select * from ranking order by rank desc";
+				psmt = conn.prepareStatement(sql);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
-		} finally {
-			allClose();
+				// ?채우기 - ?가 없으면 생략
 
+				// sql통과 하세요!
+				rs = psmt.executeQuery();
+
+				// select 한줄의 데이터 확인 rs.next()
+				while (rs.next()) {
+					String id = rs.getString(1);
+					int Ranking = rs.getInt(2);
+
+					LoginDTO ldto = new LoginDTO(id, Ranking);
+					dtoList.add(ldto);
+				}
+
+				return dtoList;
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			} finally {
+				allClose();
+			}
 		}
 
-	}
-
-	// update기능 메소드
-	public int updateMember(String update_pw, String update_id) {
+	// update기능 메소드 - 민중님 작성, 채영 수정 -> ranking 정보 업데이트
+	public int updateRanking(int update_rank, String update_id) {
+		
 		getConn();
+		
 		try {
+			
+			 conn.setAutoCommit(false);
 
 			// sql통과 통로
-			String sql = "update member set pw = ? where id = ?";
+			String sql = "update ranking set rank = ? + rank where id = ?";
 			psmt = conn.prepareStatement(sql);
 
 			// ?채우기 - ?가 없으면 생략
-			psmt.setString(1, update_pw);
+			psmt.setInt(1, update_rank);
 			psmt.setString(2, update_id);
 
 			// sql통과 하세요!
 			int row = psmt.executeUpdate();
+			
+			conn.commit();
+			
 			return row;
+			
 
 		} catch (SQLException e) {
+			try {
+				conn.rollback(); // 오류 발생하면 롤백
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 			return 0;
 		} finally {
@@ -101,7 +149,8 @@ public class DatabaseDAO {
 
 	}
 
-	// insert기능 메소드
+
+	// insert기능 메소드 - 민중님 작성
 	public int insertMember(LoginDTO ldto) {
 		getConn();
 		try {
@@ -128,41 +177,38 @@ public class DatabaseDAO {
 		}
 	}
 
-	// select기능 메소드
-	public ArrayList<LoginDTO> selectMember() {
-		ArrayList<LoginDTO> dtoList = new ArrayList<LoginDTO>();
-
+	public int insertRank(String input_id) { // 랭킹 정보 최초 생성
 		getConn();
 		try {
+
 			// sql통과 통로
-			String sql = "select * from member";
+			String sql = "insert into ranking values(?,?)";
 			psmt = conn.prepareStatement(sql);
 
 			// ?채우기 - ?가 없으면 생략
+			psmt.setString(1, input_id);
+			psmt.setInt(2, 0);
 
 			// sql통과 하세요!
-			rs = psmt.executeQuery();
-
-			// select 한줄의 데이터 확인 rs.next()
-			while (rs.next()) {
-				String id = rs.getString(1);
-				String table_pw = rs.getString(2);
-				String name = rs.getString(3);
-				String email = rs.getString(4);
-
-				LoginDTO ldto = new LoginDTO(id, table_pw, name, email);
-				dtoList.add(ldto);
-			}
-
-			return dtoList;
+			int row = psmt.executeUpdate();
+			
+			conn.commit();
+			
+			return row;
 
 		} catch (SQLException e) {
+			try {
+				conn.rollback(); // 오류 발생하면 롤백
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
-			return null;
+			return 0;
 		} finally {
 			allClose();
 		}
 	}
+	
 	
 	public static Boolean loginInfo(String id, String pw){
 		// 로그인 검사하는 메소드 loginInfo
@@ -211,7 +257,7 @@ public class DatabaseDAO {
 	}
 	
 	public static Boolean signUp(String join_id) {
-		// 로그인 id 중복 검사하는 메소드 signUp
+		// 회원가입 id 중복 검사하는 메소드 signUp
 		
 		getConn();
 		
@@ -232,10 +278,10 @@ public class DatabaseDAO {
 			
 			while (rs.next()) { // 데이터 한줄 가져오기
 				dbID = rs.getString(1);
-				if(dbID.equals(join_id)) { // 비어있지 않다면 -> 가입 불가능
+				if(dbID.equals(join_id)) { // 같다면 -> 아이디 존재
 					return false;
 				}else { // 
-					return true; // 비어있다면 -> 가입 가능
+					return true; // 다르다면 -> 아이디 없음
 				}
 			}
 			
@@ -244,7 +290,7 @@ public class DatabaseDAO {
 		} finally {
 			allClose();
 		}
-	return null;
+	return false;
 	}
-
+	
 }

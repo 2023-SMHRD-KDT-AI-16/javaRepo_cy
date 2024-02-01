@@ -7,10 +7,10 @@ public class LoginDTO {
 	private String name; // 회원 이메일
 	private String email; // 회원 닉네임
 
-	private int pic_num; // 영화사진 인덱스
-	private String pic_id; // 영화사진 이름
-	private String pic_hint; // 영화속 명대사
-	private String actor; // 출연 배우
+//	private int pic_num; // 영화사진 인덱스
+//	private String pic_id; // 영화사진 이름
+	//private String pic_hint; // 영화속 명대사
+//	private String actor; // 출연 배우
 
 	private int rank; // 랭킹
 
@@ -21,18 +21,12 @@ public class LoginDTO {
 		this.name = name;
 		this.email = email;
 	}
-
-
-	public LoginDTO(int pic_num, String pic_id, String pic_hint, String actor) {
-		this.pic_num = pic_num;
-		this.pic_id = pic_id;
-		this.pic_hint = pic_hint;
-		this.actor = actor;
-	}
-
-	public LoginDTO(int rank) {
+	
+	public LoginDTO(String id,int rank) {
+		this.id = id;
 		this.rank = rank;
 	}
+
 
 	// Getter -> 매개변수는 없고, 리턴값만 있는 메소드.
 	// Setter -> 매개변수만 있고, 리턴값은 없는 메소드.
@@ -69,38 +63,7 @@ public class LoginDTO {
 		this.email = email;
 	}
 
-	public int getPic_num() {
-		return pic_num;
-	}
-
-	public void setPic_num(int pic_num) {
-		this.pic_num = pic_num;
-	}
-
-	public String getPic_id() {
-		return pic_id;
-	}
-
-	public void setPic_id(String pic_id) {
-		this.pic_id = pic_id;
-	}
-
-	public String getPic_hint() {
-		return pic_hint;
-	}
-
-	public void setPic_hint(String pic_hint) {
-		this.pic_hint = pic_hint;
-	}
-
-	public String getActor() {
-		return actor;
-	}
-
-	public void setActor(String actor) {
-		this.actor = actor;
-	}
-
+	
 	public int getRank() {
 		return rank;
 	}
