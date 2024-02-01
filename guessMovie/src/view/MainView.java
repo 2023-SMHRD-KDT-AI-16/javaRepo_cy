@@ -32,7 +32,7 @@ import controller.MainController;
 
 
 				System.out.println( "[설정 번호]");
-				System.out.print("[1]재생 [2]정지 [3]다음곡 [4]이전곡 [5]음악찾기 [6]시간 [7]종료 ");
+				System.out.print("[1]재생 [2]정지 [3]다음곡 [4]이전곡 [5]음악찾기 [6]시간 [7]음악리스트 [8] ");
 				System.out.println(" ");
 				System.out.print("번호 입력해주세요.>>");
 				sel = sc.nextInt();
@@ -56,11 +56,14 @@ import controller.MainController;
 					c.search(sc.next());
 					break;
 				case 6:
-					System.out.println("재생시간 ");
+					System.out.println("재생길이 ");
 					c.getPlaytime();
 					break;
-					
 				case 7:
+					System.out.println("[음악리스트] 선택하셨습니다.");
+					
+					
+				case 8:
 					test =false;
 					break;
 					

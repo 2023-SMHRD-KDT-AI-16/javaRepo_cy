@@ -205,6 +205,7 @@ public class GameMain {
 					
 				case 5:
 					// [5] 환경 설정
+					
 					break;
 					
 				case 6: 
