@@ -59,7 +59,7 @@ public class GameMain {
 				
 				boolean correct = dbDAO.signUp(join_id); // 로그인 검사
 				
-				while(correct=false) {
+				while(correct==false) {
 					System.out.println("아이디 사용이 불가합니다. 다시 입력해 주세요");
 					System.out.print("id를 입력하세요 :");
 					join_id = sc.next();
@@ -99,7 +99,7 @@ public class GameMain {
 
 				correct = dbDAO.loginInfo(join_id, join_pw);
 
-				if(correct = true) {
+				if(correct == true) {
 					System.out.println("로그인 성공 !");
 				}else {
 					System.out.println("로그인 실패");
