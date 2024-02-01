@@ -197,7 +197,7 @@ public class DatabaseDAO {
 					}
 				}else {
 					// 비어있다 -> 등록되어 있지 않다
-					System.out.println("등록되지 않은 아이디입니다.");
+					System.out.println("회원이 아닙니다");
 					return false;
 				}
 			}
@@ -211,15 +211,14 @@ public class DatabaseDAO {
 	}
 	
 	public static Boolean signUp(String join_id) {
-		// 회원가입 id 중복 검사하는 메소드 signUp
+		// 로그인 id 중복 검사하는 메소드 signUp
 		
-		boolean check = true;
 		getConn();
 		
 		String dbID = null;
 		try {
 			
-			String sql = "select id from member where ID = ?";
+			String sql = "select ID from member where ID = ?";
 			psmt = conn.prepareStatement(sql);
 		
 			psmt.setString(1, join_id);
@@ -230,23 +229,22 @@ public class DatabaseDAO {
 			rs = psmt.executeQuery();
 
 			// select 한줄의 데이터 확인 rs.next()
+			
 			while (rs.next()) { // 데이터 한줄 가져오기
 				dbID = rs.getString(1);
-				System.out.println(dbID);
-				if(dbID != null) { // 비어있지 않다면 -> 가입 불가능
+				if(dbID == join_id) { // 비어있지 않다면 -> 가입 불가능
 					return false;
 				}else { // 
 					return true; // 비어있다면 -> 가입 가능
 				}
 			}
 			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			allClose();
 		}
-	return false;
+	return null;
 	}
 
 }

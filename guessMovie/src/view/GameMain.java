@@ -66,10 +66,11 @@ public class GameMain {
 				
 				boolean correct = dbDAO.signUp(join_id); // 로그인 검사
 				
+				System.out.println(correct);
 
-				while(correct==false) {
+				while(correct) {
 
-				if(correct=false) {
+				if(correct) {
 					
 
 					System.out.println("아이디 사용이 불가합니다. 다시 입력해 주세요");
@@ -99,9 +100,8 @@ public class GameMain {
 					System.out.println("회원가입 실패");
 				}
 				
-				
-				break;
 				}
+				break;
 			case 4: 
 				// [4] 로그인
 				System.out.println("로그인 페이지 입니다.");
