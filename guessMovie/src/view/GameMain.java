@@ -128,7 +128,7 @@ public class GameMain {
 			case 5:
 				// [5] 환경 설정
 				
-				System.out.println("어떤설정을 하시겠습니까?");
+				System.out.println("설정 페이지입니다.");
 				MainView.musicPlay();
 				
 				break;
