@@ -109,6 +109,10 @@ public class GameMain {
 				
 			case 5:
 				// [5] 환경 설정
+				
+				System.out.println("어떤설정을 하시겠습니까?");
+				MainView.musicPlay();
+				
 				break;
 				
 			case 6: 
