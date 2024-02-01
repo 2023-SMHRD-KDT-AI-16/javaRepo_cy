@@ -24,6 +24,7 @@ public class SingleGameDAO {
 				// 랜덤으로 영화 선택
 				int randomIndex = (int) (Math.random() * movieTitles.length);
 				String selectedMovie = movieTitles[randomIndex].toUpperCase(); // 대소문자 구분 없이 맞출 수 있도록 대문자로 변환
+				int j = randomIndex;
 				
 				String[][] hintCharacter = { // 2차원배열로 각 영화의 주인공들
 						{"송강호","김영애","오달수","곽도원","임시완"}, // 변호인
@@ -43,11 +44,16 @@ public class SingleGameDAO {
 		        System.out.println("영화 제목 맞추기 게임을 시작합니다!");
 				System.out.println("영화의 제목은 " + selectedMovie.length() + "글자 입니다.");
 
+				ImageDAO dao = new ImageDAO();
+				dao.displayImage(j);
+				
 				// 사용자 입력 받기
 				Scanner scanner = new Scanner(System.in);
 
+				
 				// 사용자에게 영화 제목을 맞추도록 함
 				while ((!gameWon && attempts < maxNumber) && toggle) {
+					
 					int Remaining_Number = maxNumber - attempts; // 남은 도전횟수 보여주기
 					System.out.println("남은 시도 횟수: " + Remaining_Number);
 					System.out.print("영화 제목을 입력하세요: ");
