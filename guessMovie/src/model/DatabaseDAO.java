@@ -8,13 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DatabaseDAO {
+	// DB 관련된 메소드 모음
 
-	private Connection conn;
-	private PreparedStatement psmt;
-	private ResultSet rs;
+	private static Connection conn;
+	private static PreparedStatement psmt;
+	private static ResultSet rs;
 
 	// Connect 메소드
-	private void getConn() {
+	public static void getConn() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -24,9 +25,8 @@ public class DatabaseDAO {
 
 			conn = DriverManager.getConnection(url, user, pw);
 			if (conn != null) {
-				System.out.println("연결 성공");
 			} else {
-				System.out.println("연결 실패");
+				System.out.println("Database 연결 실패 ㅠ");
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
@@ -36,7 +36,7 @@ public class DatabaseDAO {
 	}
 
 	// close 하는 메소드
-	private void allClose() {
+	private static void allClose() {
 		try {
 			if (rs != null)
 				rs.close();
@@ -128,69 +128,30 @@ public class DatabaseDAO {
 		}
 	}
 
-	// 로그인 메소드
-	public Boolean loginInfo(String id, String pw) {
-		// 로그인 검사하는 메소드 loginInfo
-
-		String dbID = null;
-		String dbPW = null;
+	// select기능 메소드
+	public ArrayList<LoginDTO> selectMember() {
+		ArrayList<LoginDTO> dtoList = new ArrayList<LoginDTO>();
 
 		getConn();
 		try {
 			// sql통과 통로
-			String sql = "select ID,PW from member where ID = ?";
+			String sql = "select * from member";
 			psmt = conn.prepareStatement(sql);
 
 			// ?채우기 - ?가 없으면 생략
-
-			psmt.setString(1, id);
 
 			// sql통과 하세요!
 			rs = psmt.executeQuery();
 
 			// select 한줄의 데이터 확인 rs.next()
 			while (rs.next()) {
-				dbID = rs.getString(1);
-				dbPW = rs.getString(2);
-			}
-			if (dbID.equals(id) && dbPW.equals(pw)) { // 아이디 비번 일치
-				System.out.println("아이디 비번 일치");
-				return true;
-			} else {
-				System.out.println("아이디 비번 불일치");
-				return false;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			allClose();
-		}
-		return false;
-	}
+				String id = rs.getString(1);
+				String table_pw = rs.getString(2);
+				String name = rs.getString(3);
+				String email = rs.getString(4);
 
-	// 랭킹 순위 메소드(숙제)
-	public ArrayList<LoginDTO> showRank() {
-		ArrayList<LoginDTO> dtoList = new ArrayList<LoginDTO>();
-
-		getConn();
-		try {
-			// sql통과 통로
-			String sql = "select * from ranking order by rank desc"; // 전송할 쿼리문
-			psmt = conn.prepareStatement(sql); // 쿼리문 전송 준비
-
-			// ?채우기 - ?가 없으면 생략
-
-			// sql통과 하세요!
-			rs = psmt.executeQuery(); // 쿼리문 전송하고 실행
-
-			// select 한줄의 데이터 확인 rs.next()
-			while (rs.next()) {
-				String id2 = rs.getString(1);
-				int rank = rs.getInt(2);
-				// System.out.println(rank);
-				LoginDTO ldto = new LoginDTO(id2,rank);
+				LoginDTO ldto = new LoginDTO(id, table_pw, name, email);
 				dtoList.add(ldto);
-				// System.out.println(dtoList);
 			}
 
 			return dtoList;
@@ -201,6 +162,89 @@ public class DatabaseDAO {
 		} finally {
 			allClose();
 		}
-
 	}
+	
+	public static Boolean loginInfo(String id, String pw){
+		// 로그인 검사하는 메소드 loginInfo
+		
+		String dbID = null;
+		String dbPW = null;
+		
+		getConn();
+		try {
+			// sql통과 통로
+			String sql = "select ID,PW from member where ID = ?";
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, id);
+			
+			// ?채우기 - ?가 없으면 생략
+
+			// sql통과 하세요!
+			rs = psmt.executeQuery();
+
+			// select 한줄의 데이터 확인 rs.next()
+			while (rs.next()) {
+				dbID = rs.getString(1);
+				dbPW = rs.getString(2);
+				if(dbID != null || dbPW != null) { // 비어있지 않다 -> 회원이다
+					if(dbID.equals(id)&&dbPW.equals(pw)) { // 아이디 비번 일치
+						System.out.println("아이디 비번 일치");
+						return true;
+					}else { // 
+						System.out.println("아이디 비번 불일치");
+						return false;
+					}
+				}else {
+					// 비어있다 -> 등록되어 있지 않다
+					System.out.println("회원 가입이 가능합니다");
+					return false;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			allClose();
+		}
+		return false;
+	}
+	
+	public static Boolean signUp(String join_id) {
+		// 로그인 id 중복 검사하는 메소드 signUp
+		
+		getConn();
+		
+		String dbID = null;
+		try {
+			
+			String sql = "select ID from member where ID = ?";
+			psmt = conn.prepareStatement(sql);
+		
+			psmt.setString(1, join_id);
+		
+			// ?채우기 - ?가 없으면 생략
+
+			// sql통과 하세요!
+			rs = psmt.executeQuery();
+
+			// select 한줄의 데이터 확인 rs.next()
+			
+			while (rs.next()) { // 데이터 한줄 가져오기
+				dbID = rs.getString(1);
+				if(dbID != null) { // 비어있지 않다면 -> 가입 불가능
+					return false;
+				}else { // 
+					return true; // 비어있다면 -> 가입 가능
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			allClose();
+		}
+	return false;
+	}
+
 }
