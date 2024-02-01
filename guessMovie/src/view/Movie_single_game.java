@@ -11,6 +11,7 @@ public class Movie_single_game {
 		static int score = 0; // 시작점수는 0점
 		static int maxScore = 10; // 문제를 힌트없이 맞추면 10점
 		static int hintScore = 5; // 힌트를 보고 맞추면 5점
+		static int WrongTake = -5; // 문제를 틀릴 시 -5점
 		static boolean toggle = true;
 		static boolean hintTaken = false; // 사용자가 힌트를 보았는지 여부를 나타내는 변수
 
@@ -22,6 +23,7 @@ public class Movie_single_game {
 					attempts = 0;
 					hintTaken = false;
 					toggle = true;
+					//WrongTake = false;
 				}
 				System.out.println("게임을 종료합니다");
 			}
@@ -106,6 +108,9 @@ public class Movie_single_game {
 			                              
 								} else { // 정답이 아닐 경우
 								System.out.println("틀렸습니다. 다시 시도하세요.");
+								score -= WrongTake;
+								//틀릴 경우
+								score-=5;
 								
 								// 힌트 제공
 								if(attempts == 1) {
