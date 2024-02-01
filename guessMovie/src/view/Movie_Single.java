@@ -13,7 +13,7 @@ public class Movie_Single {
 		while (playGame()) {
 
 		}
-		System.out.println("게임을 종료합니다");
+		System.out.println("게임을 종료");
 	}
 
 	// 게임 플레이하는 메소드
