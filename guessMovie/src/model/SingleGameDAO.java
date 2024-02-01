@@ -1,8 +1,8 @@
-package view;
+package model;
 
 import java.util.Scanner;
 
-public class Movie_single_game {
+public class SingleGameDAO {
 
 	// 싱글게임 기회는 5번 힌트1번 주인공이름 제공 한번에 맞추면 10점 힌트보고 맞추면 5점
 		static boolean gameWon = false; //게임이 종료될때 사용되는 변수 답을 맞추면 true로 바뀌고 틀리면 false로 유지
@@ -15,19 +15,8 @@ public class Movie_single_game {
 		static boolean hintTaken = false; // 사용자가 힌트를 보았는지 여부를 나타내는 변수
 
 			
-			public static void main(String[] args) {
-				// 게임을 다시 할 것인지 물어봄
-				while (playGame()) {
-					// 게임이 종료되면 변수초기화
-					attempts = 0;
-					hintTaken = false;
-					toggle = true;
-				}
-				System.out.println("게임을 종료합니다");
-			}
-
 			// 게임 플레이하는 메소드
-			private static boolean playGame() {
+			public static boolean playGame() {
 
 				// 영화 제목 배열
 				String[] movieTitles = { "변호인", "도둑들", "택시운전사", "기생충", "써니", "7번방의 선물", "국제시장", "명량", "극한직업", "신과함께" };
