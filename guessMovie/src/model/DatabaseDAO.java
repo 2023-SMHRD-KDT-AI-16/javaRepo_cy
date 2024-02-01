@@ -197,7 +197,7 @@ public class DatabaseDAO {
 					}
 				}else {
 					// 비어있다 -> 등록되어 있지 않다
-					System.out.println("등록되지 않은 아이디입니다.");
+					System.out.println("회원이 아닙니다");
 					return false;
 				}
 			}
@@ -232,7 +232,7 @@ public class DatabaseDAO {
 			
 			while (rs.next()) { // 데이터 한줄 가져오기
 				dbID = rs.getString(1);
-				if(dbID != null) { // 비어있지 않다면 -> 가입 불가능
+				if(dbID == join_id) { // 비어있지 않다면 -> 가입 불가능
 					return false;
 				}else { // 
 					return true; // 비어있다면 -> 가입 가능
@@ -244,7 +244,7 @@ public class DatabaseDAO {
 		} finally {
 			allClose();
 		}
-	return false;
+	return null;
 	}
 
 }

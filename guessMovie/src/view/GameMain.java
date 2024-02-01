@@ -66,8 +66,13 @@ public class GameMain {
 				
 				boolean correct = dbDAO.signUp(join_id); // 로그인 검사
 				
-				if(correct=false) {
+				System.out.println(correct);
+
+				while(correct) {
+
+				if(correct) {
 					
+
 					System.out.println("아이디 사용이 불가합니다. 다시 입력해 주세요");
 					System.out.print("id를 입력하세요 :");
 					join_id = sc.next();
@@ -95,9 +100,8 @@ public class GameMain {
 					System.out.println("회원가입 실패");
 				}
 				
-				
+				}
 				break;
-		
 			case 4: 
 				// [4] 로그인
 				System.out.println("로그인 페이지 입니다.");
@@ -106,11 +110,11 @@ public class GameMain {
 				join_id = sc.next();
 			
 				System.out.print("pw를 입력하세요 :");
-				join_pw = sc.next();
+				String join_pw = sc.next();
 
 				correct = dbDAO.loginInfo(join_id, join_pw);
 
-				if(correct = true) {
+				if(correct == true) {
 					System.out.println("로그인 성공 !");
 					state = false;
 					member = true;
@@ -123,6 +127,10 @@ public class GameMain {
 				
 			case 5:
 				// [5] 환경 설정
+				
+				System.out.println("설정 페이지입니다.");
+				MainView.musicPlay();
+				
 				break;
 				
 			case 6: 
