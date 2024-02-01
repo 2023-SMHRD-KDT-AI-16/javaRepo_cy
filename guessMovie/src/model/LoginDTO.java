@@ -11,7 +11,8 @@ public class LoginDTO {
 	private String pic_id; // 영화사진 이름
 	private String pic_hint; // 영화속 명대사
 	private String actor; // 출연 배우
-
+	
+	private String id2;
 	private int rank; // 랭킹
 
 	// 생성자 - 오버로딩 중복정의
@@ -22,7 +23,6 @@ public class LoginDTO {
 		this.email = email;
 	}
 
-
 	public LoginDTO(int pic_num, String pic_id, String pic_hint, String actor) {
 		this.pic_num = pic_num;
 		this.pic_id = pic_id;
@@ -30,7 +30,8 @@ public class LoginDTO {
 		this.actor = actor;
 	}
 
-	public LoginDTO(int rank) {
+	public LoginDTO(String id2, int rank) {
+		this.id2 = id2;
 		this.rank = rank;
 	}
 
@@ -101,6 +102,14 @@ public class LoginDTO {
 		this.actor = actor;
 	}
 
+	public String getId2() {
+		return id2;
+	}
+
+	public void setId2(String id2) {
+		this.id2 = id2;
+	}
+
 	public int getRank() {
 		return rank;
 	}
@@ -108,5 +117,9 @@ public class LoginDTO {
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
+	
+	
+
+
 
 }

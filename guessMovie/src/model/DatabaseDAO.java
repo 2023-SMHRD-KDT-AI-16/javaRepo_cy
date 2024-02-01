@@ -185,9 +185,10 @@ public class DatabaseDAO {
 
 			// select 한줄의 데이터 확인 rs.next()
 			while (rs.next()) {
+				String id2 = rs.getString(1);
 				int rank = rs.getInt(2);
 				// System.out.println(rank);
-				LoginDTO ldto = new LoginDTO(rank);
+				LoginDTO ldto = new LoginDTO(id2,rank);
 				dtoList.add(ldto);
 				// System.out.println(dtoList);
 			}

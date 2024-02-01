@@ -105,7 +105,8 @@ public class MovieMain {
 				ArrayList<LoginDTO> dtoList = dbdao.showRank();
 				for (int i = 0; i < dtoList.size(); i++) {
 					// System.out.println(dtoList.get(i)); // 주소값
-					System.out.println((i + 1) + "위 : " + dtoList.get(i).getRank());
+					System.out.println(
+							(i + 1) + "위 : " + dtoList.get(i).getId2() + " ===> 점수 : " + dtoList.get(i).getRank());
 
 				}
 
