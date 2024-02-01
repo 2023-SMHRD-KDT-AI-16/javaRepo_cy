@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DatabaseDAO {
+	// DB 관련된 메소드 모음
 
 	private static Connection conn;
 	private static PreparedStatement psmt;
@@ -24,9 +25,8 @@ public class DatabaseDAO {
 
 			conn = DriverManager.getConnection(url, user, pw);
 			if (conn != null) {
-				System.out.println("연결 성공");
 			} else {
-				System.out.println("연결 실패");
+				System.out.println("Database 연결 실패 ㅠ");
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
@@ -187,20 +187,64 @@ public class DatabaseDAO {
 			while (rs.next()) {
 				dbID = rs.getString(1);
 				dbPW = rs.getString(2);
+				if(dbID != null || dbPW != null) { // 비어있지 않다 -> 회원이다
+					if(dbID.equals(id)&&dbPW.equals(pw)) { // 아이디 비번 일치
+						System.out.println("아이디 비번 일치");
+						return true;
+					}else { // 
+						System.out.println("아이디 비번 불일치");
+						return false;
+					}
+				}else {
+					// 비어있다 -> 등록되어 있지 않다
+					System.out.println("회원 가입이 가능합니다");
+					return false;
+				}
 			}
-			if(dbID.equals(id)&&dbPW.equals(pw)) { // 아이디 비번 일치
-				System.out.println("아이디 비번 일치");
-				return true;
-			}else {
-				System.out.println("아이디 비번 불일치");
-				return false;
-			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			allClose();
 		}
 		return false;
+	}
+	
+	public static Boolean signUp(String join_id) {
+		// 로그인 id 중복 검사하는 메소드 signUp
+		
+		getConn();
+		
+		String dbID = null;
+		try {
+			
+			String sql = "select ID from member where ID = ?";
+			psmt = conn.prepareStatement(sql);
+		
+			psmt.setString(1, join_id);
+		
+			// ?채우기 - ?가 없으면 생략
+
+			// sql통과 하세요!
+			rs = psmt.executeQuery();
+
+			// select 한줄의 데이터 확인 rs.next()
+			
+			while (rs.next()) { // 데이터 한줄 가져오기
+				dbID = rs.getString(1);
+				if(dbID != null) { // 비어있지 않다면 -> 가입 불가능
+					return false;
+				}else { // 
+					return true; // 비어있다면 -> 가입 가능
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			allClose();
+		}
+	return false;
 	}
 
 }
