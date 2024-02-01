@@ -1,8 +1,8 @@
-package view;
+package model;
 
 import java.util.Scanner;
 
-public class Movie_single_game {
+public class SingleGameDAO {
 
 	// 싱글게임 기회는 5번 힌트1번 주인공이름 제공 한번에 맞추면 10점 힌트보고 맞추면 5점
 		static boolean gameWon = false; //게임이 종료될때 사용되는 변수 답을 맞추면 true로 바뀌고 틀리면 false로 유지
@@ -11,25 +11,12 @@ public class Movie_single_game {
 		static int score = 0; // 시작점수는 0점
 		static int maxScore = 10; // 문제를 힌트없이 맞추면 10점
 		static int hintScore = 5; // 힌트를 보고 맞추면 5점
-		static int WrongTake = -5; // 문제를 틀릴 시 -5점
 		static boolean toggle = true;
 		static boolean hintTaken = false; // 사용자가 힌트를 보았는지 여부를 나타내는 변수
 
 			
-			public static void main(String[] args) {
-				// 게임을 다시 할 것인지 물어봄
-				while (playGame()) {
-					// 게임이 종료되면 변수초기화
-					attempts = 0;
-					hintTaken = false;
-					toggle = true;
-					//WrongTake = false;
-				}
-				System.out.println("게임을 종료합니다");
-			}
-
 			// 게임 플레이하는 메소드
-			private static boolean playGame() {
+			public static boolean playGame() {
 
 				// 영화 제목 배열
 				String[] movieTitles = { "변호인", "도둑들", "택시운전사", "기생충", "써니", "7번방의 선물", "국제시장", "명량", "극한직업", "신과함께" };
@@ -87,7 +74,7 @@ public class Movie_single_game {
 								
 								 // 사용자에게 게임을 다시 할 것인지 물어봄
 			                    System.out.print("게임을 다시 하시겠습니까? (y/n): ");
-		                        String playAgain = scanner.nextLine();
+			                    String playAgain = scanner.nextLine();
 
 			                    if (playAgain.equals("y")) {
 			                        // 새로운 문제 선택
@@ -108,9 +95,6 @@ public class Movie_single_game {
 			                              
 								} else { // 정답이 아닐 경우
 								System.out.println("틀렸습니다. 다시 시도하세요.");
-								score -= WrongTake;
-								//틀릴 경우
-								score-=5;
 								
 								// 힌트 제공
 								if(attempts == 1) {
