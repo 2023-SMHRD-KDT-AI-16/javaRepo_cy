@@ -13,13 +13,20 @@ public class SingleGameDAO {
 		static int hintScore = 5; // 힌트를 보고 맞추면 5점
 		static boolean toggle = true;
 		static boolean hintTaken = false; // 사용자가 힌트를 보았는지 여부를 나타내는 변수
+		
+		static DatabaseDAO dbDAO = new DatabaseDAO(); // 새로운 DatabaseDAO 생성
 
+		public static String member_id = null; // 멤버 아이디 생성
+		
+			public void setMember(String id) { // 멤버 아이디 설정해주는 메소드
+				this.member_id = id;
+			}
 			
 			// 게임 플레이하는 메소드
 			public static boolean playGame() {
 
 				// 영화 제목 배열
-				String[] movieTitles = { "변호인", "도둑들", "택시운전사", "기생충", "써니", "7번방의 선물", "국제시장", "명량", "극한직업", "신과함께" };
+				String[] movieTitles = { "신과함께","택시운전사","극한직업", "7번방의 선물","국제시장", "기생충","명량", "써니","변호인","도둑들" };
 
 				// 랜덤으로 영화 선택
 				int randomIndex = (int) (Math.random() * movieTitles.length);
@@ -27,23 +34,38 @@ public class SingleGameDAO {
 				int j = randomIndex;
 				
 				String[][] hintCharacter = { // 2차원배열로 각 영화의 주인공들
-						{"송강호","김영애","오달수","곽도원","임시완"}, // 변호인
-						{"김윤석","김혜수","이정재","전지현","김해숙","김수현"}, // 도둑들
+						{"차태현","하정우","주지훈","김향기"}, // 신과함께
 						{"송강호","유해진","류준열","토마스 크레취만"}, // 택시운전사
-						{"송강호","이정은","최우식","박소담","이선균","조여정"}, // 기생충
-						{"심은경","강소라","김민영","박진주","남보라","민효린"}, // 써니
+						{"류승룡","이하늬","진선규","이동휘","공명"}, // 극한직업
 						{"류승룡","갈소원","박신혜","오달수","김정태"}, // 7번방의 선물
 						{"황정민","김윤진","오달수","정진영"}, // 국제시장
+						{"송강호","이정은","최우식","박소담","이선균","조여정"}, // 기생충
 						{"최민식","류승룡","조진웅"}, // 명량
-						{"류승룡","이하늬","진선규","이동휘","공명"}, // 극한직업
-						{"차태현","하정우","주지훈","김향기"} // 신과함께
+						{"심은경","강소라","김민영","박진주","남보라","민효린"}, // 써니
+						{"송강호","김영애","오달수","곽도원","임시완"}, // 변호인
+						{"김윤석","김혜수","이정재","전지현","김해죽","김수현"} // 도둑들
 				};
 				
 				
 				// 게임 시작 메시지
-		        System.out.println("영화 제목 맞추기 게임을 시작합니다!");
-				System.out.println("영화의 제목은 " + selectedMovie.length() + "글자 입니다.");
-
+				System.out.println("\n❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢ ❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢ ❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢");
+				System.out.println("\r\n"
+						+ " _     _  _______  ___      _______  _______  __   __  _______ \r\n"
+						+ "| | _ | ||       ||   |    |       ||       ||  |_|  ||       |\r\n"
+						+ "| || || ||    ___||   |    |       ||   _   ||       ||    ___|\r\n"
+						+ "|       ||   |___ |   |    |       ||  | |  ||       ||   |___ \r\n"
+						+ "|       ||    ___||   |___ |      _||  |_|  ||       ||    ___|\r\n"
+						+ "|   _   ||   |___ |       ||     |_ |       || ||_|| ||   |___ \r\n"
+						+ "|__| |__||_______||_______||_______||_______||_|   |_||_______|\r\n"
+						+ "\n");
+		        System.out.println("❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢ ❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢ ❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢");
+		        
+		        System.out.println("\t\t영화 제목 맞추기 게임을 시작합니다! ");
+		        
+		        System.out.println("❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢ ❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢ ❢◥ ▬▬▬▬▬▬ ◆ ▬▬▬▬▬▬ ◤❢");
+				System.out.println("\n영화의 제목은 " + selectedMovie.length() + "글자 입니다.");
+				
+				
 				ImageDAO dao = new ImageDAO();
 				dao.displayImage(j);
 				
@@ -69,14 +91,26 @@ public class SingleGameDAO {
 						} else {
 							// 사용자가 정답을 맞춘 경우
 							if (userGuess.equals(selectedMovie)) { // 정답일 경우
-								System.out.println("축하합니다! 영화 제목을 맞추셨습니다.");
+								System.out.println(".　♪　∧,＿∧\r\n"
+										+ "　 　(´･ω･`) ))\r\n"
+										+ "　(( (　つ　ヽ、　♪\r\n"
+										+ "　　　〉 とノ　)))\r\n"
+										+ "　　（__ノ^(＿)\r\n"
+										+ "");
+								System.out.println("축하합니다 ! 영화 제목을 맞추셨습니다.");
 								
 								if(hintTaken) {
 									score += hintScore; // 힌트를 보고 맞추면 5점
 								}else {
 									score += maxScore; // 힌트 없이 맞추면 10점
 								}
-								System.out.println("현재 획득한 점수 : " + score);
+								System.out.println("┌───────────────┐\r\n"
+										+ "  누적 점수 : "+score+"\r\n"
+										+ "└───────────────┘\r\n"
+										+ "　　ᕱ ᕱ ||\r\n"
+										+ "　 ( ･ω･ ||\r\n"
+										+ "　 /　つΦ\r\n");
+							
 								
 								 // 사용자에게 게임을 다시 할 것인지 물어봄
 			                    System.out.print("게임을 다시 하시겠습니까? (y/n): ");
@@ -93,13 +127,27 @@ public class SingleGameDAO {
 			                        toggle = true;
 			                        
 			                        // 새로운 문제의 글자 수 출력
-			                        System.out.println("영화의 제목은" + selectedMovie.length() + "글자 입니다.");
+			                        System.out.println("영화의 제목은 " + selectedMovie.length() + "글자 입니다.");
 			                    }else {
+			                    	int result = dbDAO.updateRanking(score, member_id);
+									if(result>0) { // update 성공
+										System.out.println();
+										System.out.println("✧·····················*﹡❋ ❋ ❋﹡*·····················✧");
+										System.out.println("\t\t랭킹 정보가 갱신되었습니다!");
+										System.out.println("✧·····················*﹡❋ ❋ ❋﹡*·····················✧");
+										System.out.println();
+									}else {
+										System.out.println("갱신 실패");
+									}
 			                    	return false;
 			                    }
 			                    break; // 내부 while 루프를 종료하고 외부 while 루프로 돌아감
 			                              
 								} else { // 정답이 아닐 경우
+									System.out.print("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\r\n"
+											+ "████▌▄▌▄▐▐▌█████\r\n"
+											+ "████▌▄▌▄▐▐▌▀████\r\n"
+											+ "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\r");
 								System.out.println("틀렸습니다. 다시 시도하세요.");
 								
 								// 힌트 제공
@@ -107,7 +155,8 @@ public class SingleGameDAO {
 									provideHint(hintCharacter, randomIndex);
 								}
 									
-								System.out.println("총 점수 : " + score);
+								// System.out.println("총 점수 : " + score);
+								
 								break;
 							}
 
@@ -125,8 +174,10 @@ public class SingleGameDAO {
 				String playAgain = scanner.nextLine();
 				if (playAgain.equals("y")) {
 					return true;
-				} else
+				} else {
 					return false;
+				}
+					
 			}
 				
 				// 힌트를 제공하는 메소드
