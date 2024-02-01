@@ -27,7 +27,8 @@ import controller.MainController;
 							+ "      ￣￣＼／￣￣￣￣￣￣￣\r\n"
 					+ "");
 			int sel;//사용자의 선택
-			while(true) {
+			boolean test = true;
+			while(test) {
 
 
 				System.out.println( "[설정 번호]");
@@ -57,7 +58,14 @@ import controller.MainController;
 				case 6:
 					System.out.println("재생시간 ");
 					c.getPlaytime();
+					break;
+					
+				case 7:
+					test =false;
+					break;
+					
 				default:
+					System.out.println("잘못된 입력입니다. 다시 입력해 주세요");
 					break;
 				}
 				
