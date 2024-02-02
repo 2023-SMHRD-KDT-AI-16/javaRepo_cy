@@ -312,6 +312,25 @@ public class GameMain {
 					}
 					
 					
+<<<<<<< HEAD
+				case 5:
+					// [5] 환경 설정
+					
+					break;
+					
+				case 6: 
+					// [6] 종료
+					System.out.println("정말 종료하시겠습니까? [Y/N]");
+					inputString = sc.next().toUpperCase(); // 입력을 inputString에 저장
+					
+					if(inputString.equals("Y")) {
+						System.out.println("다음에 또 봐요 !");
+						memberState = false;
+						break;
+					}else {
+						System.out.println("좋은 생각입니다!");
+						break;
+=======
 				case 4:
 					// [4] 환경 설정
 					System.out.println();
@@ -363,6 +382,7 @@ public class GameMain {
 						}
 			
 						
+>>>>>>> branch 'master' of https://github.com/2023-SMHRD-KDT-AI-16/javaRepo_cy.git
 					}
 					
 					break;
